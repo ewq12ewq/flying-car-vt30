@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>亿航智能 VT35：技术可行性、应用场景与市场可行性 | 飞行汽车技术基础</title>
+<style>
+  :root{
+    --ink:#1d2733; --ink-soft:#465568; --muted:#6b7886; --line:#e3e8ee;
+    --bg:#ffffff; --bg-soft:#f5f7fa; --accent:#1f5fa6; --accent-soft:#eaf2fa;
+    --warn:#9a6a1b; --warn-soft:#fbf3e4;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif;
+    line-height:1.78; font-size:16px;
+  }
+  .wrap{max-width:880px; margin:0 auto; padding:0 24px;}
+  header.masthead{padding:56px 0 28px; border-bottom:1px solid var(--line);}
+  .kicker{font-size:13px; letter-spacing:.12em; color:var(--muted); text-transform:uppercase; margin-bottom:14px;}
+  h1{font-size:30px; line-height:1.35; margin:0 0 12px; font-weight:700;}
+  h1 .en{display:block; font-size:18px; font-weight:500; color:var(--ink-soft); margin-top:8px;}
+  .meta{margin-top:18px; font-size:14px; color:var(--muted);}
+  .meta p{margin:2px 0;}
+  figure{margin:28px 0;}
+  figure img{width:100%; border-radius:10px; display:block; border:1px solid var(--line);}
+  figcaption{font-size:13.5px; color:var(--muted); margin-top:10px; line-height:1.7;}
+  nav.toc{background:var(--bg-soft); border:1px solid var(--line); border-radius:12px; padding:20px 24px; margin:28px 0;}
+  nav.toc h2{font-size:15px; margin:0 0 12px; color:var(--ink-soft);}
+  nav.toc ol{margin:0; padding-left:22px; columns:2; column-gap:32px;}
+  nav.toc li{margin:5px 0;}
+  nav.toc a{color:var(--accent); text-decoration:none;}
+  nav.toc a:hover{text-decoration:underline;}
+  section{padding:36px 0; border-bottom:1px solid var(--line);}
+  section:last-of-type{border-bottom:none;}
+  h2{font-size:23px; margin:0 0 6px; font-weight:700;}
+  h2 .en{display:block; font-size:15px; font-weight:500; color:var(--muted); margin-top:4px;}
+  h3{font-size:17px; margin:26px 0 10px; color:var(--ink);}
+  p{margin:12px 0;}
+  .lead{font-size:17px; color:var(--ink-soft);}
+  ul,ol{padding-left:22px;}
+  li{margin:7px 0;}
+  .stats{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin:24px 0;}
+  .stat{background:var(--bg-soft); border:1px solid var(--line); border-radius:12px; padding:16px; text-align:center;}
+  .stat .num{font-size:24px; font-weight:700; color:var(--accent);}
+  .stat .lbl{font-size:13px; color:var(--muted); margin-top:4px;}
+  table{width:100%; border-collapse:collapse; margin:20px 0; font-size:14.5px;}
+  th,td{border:1px solid var(--line); padding:10px 12px; vertical-align:top; text-align:left;}
+  th{background:var(--bg-soft); font-weight:600; color:var(--ink-soft);}
+  tr:nth-child(even) td{background:#fafbfc;}
+  .note{background:var(--accent-soft); border-left:3px solid var(--accent); border-radius:0 10px 10px 0; padding:14px 18px; margin:20px 0; font-size:14.5px;}
+  .warn{background:var(--warn-soft); border-left:3px solid var(--warn); border-radius:0 10px 10px 0; padding:14px 18px; margin:20px 0; font-size:14.5px;}
+  .arch{display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin:22px 0;}
+  .arch .box{border:1px solid var(--line); border-radius:12px; padding:16px; background:#fff;}
+  .arch .box h4{margin:0 0 8px; font-size:15px; color:var(--accent);}
+  .arch .box ul{margin:0; padding-left:18px; font-size:14px; color:var(--ink-soft);}
+  .timeline{margin:24px 0; padding-left:0; list-style:none;}
+  .timeline li{position:relative; padding:0 0 22px 28px; border-left:2px solid var(--line); margin-left:10px;}
+  .timeline li::before{content:""; position:absolute; left:-7px; top:6px; width:12px; height:12px; border-radius:50%; background:var(--accent);}
+  .timeline .when{font-weight:700; color:var(--accent);}
+  .refs{font-size:14px; color:var(--ink-soft);}
+  .refs ol{padding-left:22px;}
+  .refs li{margin:10px 0;}
+  .refs a{color:var(--accent); word-break:break-all;}
+  footer{padding:32px 0 56px; font-size:13px; color:var(--muted);}
+  .tag{display:inline-block; font-size:12px; color:var(--accent); background:var(--accent-soft); border-radius:6px; padding:1px 8px; margin-right:6px;}
+  @media (max-width:680px){
+    .stats{grid-template-columns:repeat(2,1fr);}
+    .arch{grid-template-columns:1fr;}
+    nav.toc ol{columns:1;}
+    h1{font-size:24px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="kicker">飞行汽车技术基础 · 课程作业案例 02 · Fundamentals of Flying Vehicle Technology</div>
+    <h1>亿航智能 VT35：技术可行性、应用场景与市场可行性
+      <span class="en">EHang VT35: Technical, Operational, and Market Feasibility</span>
+    </h1>
+    <p class="lead">它不是一台已经完成取证的城际空中出租车，也不是可以忽略的概念样机。真正值得研究的是：复合翼构型、分布式电推进、无人驾驶与远程监管、起降场复用，以及尚在推进的适航审定，如何共同定义一种面向中长途城际出行的新型航空器产品。</p>
+    <div class="meta">
+      <p>课程：飞行汽车技术基础　|　研究对象：亿航智能 VT35 长航程无人驾驶载人 eVTOL（不含 216 系列机型）</p>
+      <p>作者：课程作业学生（姓名待填）　|　证据截止：2026-11-26　|　版本：1.0</p>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+<figure>
+  <img src="assets/hero-flight.jpg" alt="亿航智能 VT35 飞行状态">
+  <figcaption>题图：亿航智能 VT35 长航程无人驾驶载人航空器飞行状态资料图。来源：EHang 官方产品页与新闻稿。图片仅用于识别研究对象，不代表本文对其商业运营成熟度作出背书。</figcaption>
+</figure>
+
+<nav class="toc">
+  <h2>文章目录 Contents</h2>
+  <ol>
+    <li><a href="#summary">执行摘要 Executive Summary</a></li>
+    <li><a href="#method">01 研究设计与证据边界 Method and Evidence</a></li>
+    <li><a href="#path">02 发展路径 Development Path</a></li>
+    <li><a href="#definition">03 产品定义与构型 Product Definition</a></li>
+    <li><a href="#architecture">04 系统架构与关键技术 Architecture and Technology</a></li>
+    <li><a href="#envelope">05 飞行包线与物理边界 Flight Envelope and Physics</a></li>
+    <li><a href="#safety">06 安全、冗余与适航 Safety, Redundancy, Airworthiness</a></li>
+    <li><a href="#scenarios">07 应用场景 Application Scenarios</a></li>
+    <li><a href="#market">08 市场可行性 Market Feasibility</a></li>
+    <li><a href="#comparison">09 竞品比较 Comparison</a></li>
+    <li><a href="#roadmap">10 工程化路线 Go/No-Go 判据</a></li>
+    <li><a href="#teaching">11 课程延伸 Teaching Notes</a></li>
+    <li><a href="#limits">12 局限与未决问题 Limitations</a></li>
+    <li><a href="#refs">参考文献 References</a></li>
+  </ol>
+</nav>
+
+<!-- ============ 执行摘要 ============ -->
+<section id="summary">
+  <h2>执行摘要<span class="en">Executive Summary</span></h2>
+  <ol>
+    <li>VT35 是亿航智能基于 VT30 原型机升级优化的复合翼（lift-and-cruise）电动垂直起降航空器，2025 年 10 月 13 日在合肥骆岗公园全球首发，定位跨城市、跨海域、跨山区的中长途出行场景。公开信息显示，该机已完成转换飞行测试并进行了公开试飞演示。<sup>[1][2][3]</sup></li>
+    <li>目前最具证据支持的判断应写成：“VT35 是一架处于适航审定阶段、已完成样机飞行与转换演示的双座无人载人 eVTOL 原型与预生产机型”，而不是“已经取得载人商业运营资质的城际飞行器”。截至证据截止日，其型号合格证（TC）仍在中国民航局审定流程中。<sup>[2][8]</sup></li>
+    <li>八个分布式升力螺旋桨负责垂直起降，一个尾推螺旋桨与固定翼负责巡航；串列双翼、全电推进和多重冗余的飞控、动力、航电系统，构成了它相对多旋翼机型的航程优势，但电池能量密度、转换飞行控制和巡航废阻仍是物理边界。<sup>[1][4]</sup></li>
+    <li>监管身份是比气动布局更关键的约束。EH216-S 已经走通的型号合格证、生产许可证、标准适航证与运营合格证路径，可以作为经验参照，但不能自动延伸为 VT35 的合规结论；城际航线、空域审批、运营人资质和地面风险责任仍需逐项落实。<sup>[8][9]</sup></li>
+    <li>技术可行性应拆成“演示可行、工程化待验证、运输化未证明”三层。市场可行性应视为面向城市圈点对点出行与高端体验的低频、高价值早期业务，而不是短期大众通勤市场。</li>
+    <li>对课程作业最重要的启示是：产品的传播形象越完整，越需要证据表。一段试飞视频不能替代飞行包线、冗余分析、适航状态、维护周转和全寿命成本。</li>
+  </ol>
+  <div class="stats">
+    <div class="stat"><div class="num">8+1</div><div class="lbl">升力桨 + 尾推桨 Distributed props</div></div>
+    <div class="stat"><div class="num">≥200 km</div><div class="lbl">满载设计航程 Full-load range</div></div>
+    <div class="stat"><div class="num">2 座</div><div class="lbl">双座无人载人 Two seats, pilotless</div></div>
+    <div class="stat"><div class="num">650 万元</div><div class="lbl">标准版中国市场指导价（人民币）</div></div>
+  </div>
+</section>
+
+<!-- ============ 01 研究设计 ============ -->
+<section id="method">
+  <h2>01 研究设计与证据边界<span class="en">Research Design and Evidence Boundary</span></h2>
+  <p>本文采用“系统综述式案例评估”，而不是宣称完成了一项全数据库、多评审员的正式系统综述。研究过程包括问题界定、来源检索、来源分级、证据矩阵、工程评估和敏感性分析。研究对象限定为亿航智能 VT35 机型族，时间范围从 2021 年 VT-30 原型机发布，到 2026 年 11 月 26 日。</p>
+  <p>检索覆盖亿航智能官方产品页与投资者关系新闻稿、中国民航局及地区管理局公开文件、主流媒体与行业报道、航空器适航专用条件、功能安全与预期功能安全标准、同行评审论文与行业研究报告。最关键的边界是：公开演示视频能够支持“完成了垂直起降、悬停与转换飞行等观察性动作”，但不能自动证明持续航线能力、安全完整性等级、可靠度、适航符合性或量产一致性。</p>
+  <p>研究框架借鉴工程证据综述的“问题—方法—数据—试验—证据—限制—迁移”链条。对 eVTOL 这类尚处在产品化和监管形成期的对象，企业披露质量、运行数据和适用标准都不均衡，因此本文不计算跨研究的单一性能均值，而是用证据强度、能力层级和适用边界进行综合：每个数字都能回到原始来源，每个推论都能看到前提。</p>
+  <h3>纳入与排除标准</h3>
+  <ul>
+    <li>纳入：与 VT35 或其原型 VT-30 直接相关；能够解释复合翼构型、电推进、无人飞行控制、适航审定、低空运行、市场或公众接受度；来源可追溯且发布时间可确认。</li>
+    <li>排除：无法定位原文的二次转述；把概念渲染、特效画面或粉丝制作当成产品证据；没有出处却声称飞行高度、续航、载客量或价格的网络帖子；以及用“万亿低空市场”直接推导单款机型销量的营销材料。</li>
+  </ul>
+  <div class="note"><strong>证据分级规则：</strong>官方披露只证明企业提出了某项指标或展示了某项行为；第三方报道用于交叉核验；标准与论文用于解释技术机理与合规要求；本文的数量级估算只用于建立边界判断，均不冒充官方数据。</div>
+  <table>
+    <thead>
+      <tr><th>来源类别</th><th>检索策略</th><th>用途</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>亿航官方与 IR</td><td>VT35 产品页；VT35 全球首发新闻稿；VT-30 发布稿；EH216-S 适航历程</td><td>确认构型、参数、定价、取证状态与产品定位</td></tr>
+      <tr><td>监管机构</td><td>CAAC 及中南地区管理局公开文件；TC / PC / AC / OC 颁证记录</td><td>确认适航与运营约束的现行状态</td></tr>
+      <tr><td>媒体与行业报道</td><td>合肥首发、公开试飞、城际场景与订单相关报道</td><td>交叉核验演示事实与场景口径</td></tr>
+      <tr><td>标准与研究</td><td>EASA SC-VTOL；FAA powered-lift；ISO 26262；ISO 21448；UAM 成熟度研究</td><td>建立安全、适航与运行体系的评价基线</td></tr>
+      <tr><td>企业对照</td><td>Joby、Archer、峰飞航空、小鹏汇天等公开产品资料</td><td>比较产品类别、验证路径与商业逻辑</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ============ 02 发展路径 ============ -->
+<section id="path">
+  <h2>02 发展路径：从 VT-30 原型到 VT35 预生产机型<span class="en">Development Path: From VT-30 Prototype to VT35</span></h2>
+  <p>亿航的城际航线探索并非始于 VT35。2021 年 5 月，公司发布首款面向城际空中交通的复合翼机型 VT-30，设计航程 300 公里、设计续航 100 分钟，双座布局，八个螺旋桨加一对固定机翼与尾部推进桨；同年 9 月，VT-30 在珠海航展前夕全球公开亮相。<sup>[7]</sup> 受电池能量密度、构型优化与适航路径等因素影响，这一原型没有直接进入量产，而是为后续长航程机型积累了气动布局、动力布置和试飞经验。</p>
+  <p>2025 年 3 月，中国民航局受理亿航智能递交的 VT35 无人驾驶载人航空器型号合格证（TC）申请，机型进入适航审定阶段。<sup>[2]</sup> 2025 年 10 月 13 日，VT35 在合肥骆岗公园举行全球首发，现场公开了转换飞行测试与试飞视频，并公布标准版中国市场指导价 650 万元人民币；相较 VT-30，VT35 在缩减整机尺寸的同时保持气动效率与飞行稳定性，机长、翼展均约 8 米，高约 3 米。<sup>[2][3][4]</sup> 2025 年 12 月，VT35 在合肥完成首次公开飞行演示，被视为向技术验证与场景应用迈出的实质性一步。<sup>[6]</sup></p>
+  <ul class="timeline">
+    <li><span class="when">2021.05</span>　VT-30 发布：亿航首款城际复合翼机型，设计航程 300 km、续航 100 min，双座布局。<sup>[7]</sup></li>
+    <li><span class="when">2021.09</span>　VT-30 在珠海航展前夕全球公开亮相，展示复合翼升力与推力混合平衡构型。<sup>[7]</sup></li>
+    <li><span class="when">2025.03</span>　CAAC 受理 VT35 无人驾驶载人航空器 TC 申请，机型进入型号合格审定流程。<sup>[2]</sup></li>
+    <li><span class="when">2025.10.13</span>　VT35 合肥全球首发；完成转换飞行测试并公开试飞视频；标准版指导价 650 万元人民币。<sup>[2][3]</sup></li>
+    <li><span class="when">2025.12</span>　VT35 在合肥完成首次公开飞行演示，持续推进适航测试与场景拓展。<sup>[6]</sup></li>
+    <li><span class="when">至今</span>　适航审定与内部测试试飞稳步推进；尚未取得 TC、PC、AC 及商业运营许可。</li>
+  </ul>
+  <div class="warn">时间节点记录的是产品叙事与工程节点的变化，不等同于已验证的量产成熟度。不同阶段的口头承诺与设计指标不能混合成同一张规格表；取证与交付状态应以民航局文件和企业正式公告为准。</div>
+  <figure>
+    <img src="assets/unveil.jpg" alt="VT35 在合肥发布会亮相">
+    <figcaption>2025 年 10 月 13 日，VT35 在合肥骆岗公园“VT35 全球首发”活动中亮相。来源：EHang 投资者关系新闻稿。发布会样机展示不能替代型号合格审定证据。</figcaption>
+  </figure>
+</section>
+
+<!-- ============ 03 产品定义 ============ -->
+<section id="definition">
+  <h2>03 产品定义与构型：一台面向城际的双座复合翼航空器<span class="en">Product Definition: A Two-Seat Lift-and-Cruise Intercity Aircraft</span></h2>
+  <p>VT35 采用串列翼双座布局：舱内搭载两名乘客，不设置机载驾驶员，飞行由飞控系统沿预设航线自动完成，地面侧由远程监管与调度系统守护。垂直起降阶段由八个分布式升力螺旋桨提供升力；进入巡航后，由尾推螺旋桨推进、固定翼提供升力，以较高升阻比完成中长途飞行。<sup>[1][3]</sup></p>
+  <table>
+    <thead>
+      <tr><th>项目</th><th>公开参数 / 定位</th><th>证据状态</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>构型</td><td>复合翼（lift-and-cruise），串列双翼，8 个分布式升力桨 + 1 个尾推桨</td><td>官方披露</td></tr>
+      <tr><td>座位</td><td>双座，无机载驾驶员；有效载荷 ≥200 kg，可容纳行李</td><td>官方披露 + 媒体报道</td></tr>
+      <tr><td>尺寸</td><td>长 8.26 m，翼展 8.16 m，高 3.09 m</td><td>官方披露</td></tr>
+      <tr><td>最大起飞重量</td><td>950 kg</td><td>官方披露 + 媒体报道</td></tr>
+      <tr><td>速度与航时</td><td>经济巡航速度 ≥216 km/h；最大航时 60 min</td><td>官方披露</td></tr>
+      <tr><td>航程</td><td>满载设计航程 ≥200 km</td><td>官方披露（设计值）</td></tr>
+      <tr><td>动力</td><td>高能量密度电池 + 全电推进，纯电驱动</td><td>官方披露</td></tr>
+      <tr><td>起降兼容</td><td>可复用 EH216-S 通用起降场，适配公园、写字楼顶、停车场等场地</td><td>官方披露</td></tr>
+      <tr><td>定价</td><td>标准版中国市场官方指导价 650 万元人民币；未来乘坐按里程收费</td><td>官方披露 + 媒体报道</td></tr>
+      <tr><td>适航状态</td><td>TC 申请已受理，审定阶段；未取得 TC / PC / AC / OC</td><td>官方披露 + 监管公开信息</td></tr>
+    </tbody>
+  </table>
+  <p>把 VT35 简单归入“飞行汽车”会掩盖关键差异。它不具备道路行驶功能，设计起点就是航空器；与多旋翼机型相比，它用固定翼换取巡航效率和航程；与倾转旋翼方案相比，它用固定升力桨加独立尾推桨换取结构与控制的简化。产品定位回答的是“城市与城市之间、隔着山海海峡的点对点出行”，而不是城市内短距离摆渡。</p>
+  <figure>
+    <img src="assets/top-view.jpg" alt="VT35 起降场俯视">
+    <figcaption>VT35 在合肥起降场的俯视视角，可见串列双翼与八具升力桨的布置。来源：人民网安徽。该视角用于识别布局，不代表航线运行已经获批。</figcaption>
+  </figure>
+</section>
+
+<!-- ============ 04 系统架构 ============ -->
+<section id="architecture">
+  <h2>04 系统架构与关键技术：复合翼把多旋翼与固定翼的长处拼在一起<span class="en">Architecture and Technology: Combining Multirotor Hover and Winged Cruise</span></h2>
+  <p>根据公开信息重构的系统架构如下。虚线边界之外的监管、场地与运行约束，和机载硬件同等重要；未公开的控制拓扑、冗余通道细节和安全裕度，不在本文中臆测。</p>
+  <div class="arch">
+    <div class="box">
+      <h4>飞行器平台 Airframe</h4>
+      <ul>
+        <li>串列双翼机身与气动外形</li>
+        <li>起落架与起降支撑结构</li>
+        <li>双座座舱与观景舱盖</li>
+        <li>碳纤维复合材料、航空铝合金、钛合金结构件</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h4>推进与能源 Propulsion &amp; Energy</h4>
+      <ul>
+        <li>8 个分布式升力桨 + 对应电机</li>
+        <li>1 个尾推桨 + 巡航电机</li>
+        <li>动力电池组与配电系统</li>
+        <li>电池热管理与结构防护</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h4>航电与控制 Avionics &amp; Control</h4>
+      <ul>
+        <li>冗余飞控计算机与控制律</li>
+        <li>导航定位与航线管理</li>
+        <li>多源感知融合与探测避让</li>
+        <li>数据链路、远程监管与集群调度</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h4>外部约束 External Constraints</h4>
+      <ul>
+        <li>型号合格审定与生产许可</li>
+        <li>空域管理与航线审批</li>
+        <li>起降场、充电与维护设施</li>
+        <li>社区噪声、第三方地面安全</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>4.1 复合翼与串列翼布局</h3>
+  <p>复合翼方案把垂直起降与巡航飞行分配给不同部件：升力桨只在起降与悬停段工作，固定翼在巡航段提供主要升力，尾推桨提供前飞推力。相比倾转旋翼，它省去了发动机短舱倾转机构，控制关系更直接；代价是巡航段升力桨、桨臂与支撑结构会形成废阻，需要通过桨叶停转、造型优化或结构整合来抑制。串列双翼把机翼前后布置，在紧凑机身长度内获得足够翼面积与俯仰控制能力，也缩减了起降占地，便于复用现有城市起降场地。<sup>[1]</sup></p>
+
+  <h3>4.2 分布式电推进与冗余设计</h3>
+  <p>八个升力桨沿机翼分布式布置，单桨失效时其余桨具仍可提供部分升力与姿态控制能力。官方披露飞控、动力、航电等关键系统配备多重备份，以规避单点失效风险。<sup>[1]</sup> 分布式电推进的工程难点不在单个电机转动，而在推力分配、故障重构与降级包线：质心变化、电池消耗、阵风扰动和部件失效都会改变最优分配，控制系统必须重新分配剩余控制能力，并明确剩余状态下允许的飞行边界。</p>
+
+  <h3>4.3 电池、航时与能效耦合</h3>
+  <p>VT35 采用高能量密度电池与全电推进系统，运行零碳排放、噪声较低。航程与航时由电池可用能量、整机重量、气动效率、旋翼效率和巡航速度共同决定：固定翼巡航段升阻比越高，单位距离能耗越低；悬停段则主要受旋翼桨盘载荷与功率约束。企业公布的 200 公里航程与 60 分钟航时为满载设计值，实际数值会随载荷、气象、高度和备降要求变化。</p>
+
+  <h3>4.4 感知避让、无人飞行与远程监管</h3>
+  <p>依托导航系统实现点对点全自动飞行，多源感知融合支持精准起降与实时避障，配合远程监管全程守护；指挥调度系统支持多机协同与集群管理。<sup>[1][2]</sup> 无人载人航空器的安全论证不能只依赖机载冗余，还需要地面监管席位、通信链路、应急处置程序和运行规则共同构成闭环。公开材料尚未披露感知传感器配置、探测距离、避让决策逻辑和链路失效后的处置细节。</p>
+
+  <figure>
+    <img src="assets/cockpit.jpg" alt="VT35 座舱界面">
+    <figcaption>VT35 座舱与界面官方渲染图。来源：EHang 官方产品页。渲染图用于识别舱内布置，不用于证明未披露的航电架构或安全裕度。</figcaption>
+  </figure>
+</section>
+
+<!-- ============ 05 飞行包线 ============ -->
+<section id="envelope">
+  <h2>05 飞行包线与物理边界：演示动作不等于运输能力<span class="en">Flight Envelope: Demonstrated Moves Are Not Transport Capability</span></h2>
+  <p>复合翼航空器的飞行过程可分为垂直起降、过渡转换和固定翼巡航三段。起降段的物理约束是悬停功率与旋翼载荷；转换段需要协调升力桨与尾推桨的出力，控制姿态与轨迹；巡航段的物理约束是升阻比、电池能量与前飞速度。VT35 已经公开展示了垂直起降与转换飞行，但完整飞行包线——不同高度、风速、温度、载荷下的速度范围、航时裕度和备降能力——尚未系统披露。</p>
+  <div class="note">
+    <strong>教学估算关系：</strong>悬停条件为旋翼总拉力 ≥ 整机重力；巡航航程近似满足 <em>航程 ∝ 电池可用能量 × 升阻比 / 单位距离能耗</em>；航时 ≈ 电池可用能量 / 巡航功率。由于电池容量、重量分配、桨叶效率和气动数据未完整公开，本文只给出数量级边界，不给出单点航程或续航推算。
+  </div>
+  <table>
+    <thead>
+      <tr><th>能力层级</th><th>定义</th><th>公开证据（截至 2026-11-26）</th><th>判定</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>L1 演示飞行</td><td>垂直起降、悬停、转换飞行与公开演示</td><td>官方发布会试飞视频、合肥公开飞行演示</td><td>已演示</td></tr>
+      <tr><td>L2 受控巡航</td><td>固定翼巡航、扰动下保持姿态、复杂气象边界</td><td>转换飞行测试已完成；巡航包线与抗风试验未系统披露</td><td>待验证</td></tr>
+      <tr><td>L3 重复任务运行</td><td>可重复航线、航时与载荷裕度、备降方案、维护周转</td><td>未披露可靠性数据、维护周期与运行周转指标</td><td>未证明</td></tr>
+      <tr><td>L4 商业载人运输</td><td>取得 TC/PC/AC 与运营许可，纳入受监管城际空域网络</td><td>TC 审定中；无运营许可证据</td><td>不成立</td></tr>
+    </tbody>
+  </table>
+  <h3>5.1 转换飞行是复合翼的关键节点</h3>
+  <p>从旋翼飞行过渡到固定翼巡航，姿态、升力来源和阻力特性都会快速变化：机翼升力随速度上升，升力桨出力随前飞逐渐退出，阵风与湍流可能在过渡段放大姿态偏差。公开演示完成转换，说明工程团队解决了预设条件下的模态衔接问题；但要在不同重量、高度和气象条件下重复完成安全转换，还需要包线试验、故障注入和控制律验证作为支撑。</p>
+  <h3>5.2 续航与环境边界</h3>
+  <p>纯电航空器的航程对电池能量密度高度敏感，而城市间飞行还需要预留备降与备油（备电）裕度。公开报道中“满载航程不低于 200 公里”是在实际测试中选取的保守下限口径，<sup>[5]</sup> 不能直接等同于满载、满载风速和高温条件下的可用航程。此外，低空风切变、湍流、降水、噪声频谱和夜间运行等环境因素，都会影响实际可飞范围。</p>
+</section>
+
+<!-- ============ 06 安全与适航 ============ -->
+<section id="safety">
+  <h2>06 安全、冗余与适航：审定路径决定能否载人<span class="en">Safety, Redundancy, and Airworthiness</span></h2>
+  <p>载人 eVTOL 的安全论证围绕失效概率、冗余架构、持续适航和运行控制展开。VT35 官方披露的多重冗余覆盖飞控、动力与航电；媒体报道提及极端情况下可在高速公路降落作为应急选项。<sup>[5]</sup> 但冗余设计是否满足审定要求的失效概率与故障容错等级，需要以审定试验、安全分析和局方确认结论为准，不能由产品宣传语替代。</p>
+  <h3>6.1 适航审定状态</h3>
+  <p>作为参照，同公司 EH216-S 走过的路径是：2023 年 10 月取得 CAAC 型号合格证（TC），2023 年 12 月取得标准适航证（AC），2024 年 3 月底取得生产许可证（PC），2025 年 3 月运营航司取得载人类民用无人驾驶航空器运营合格证（OC）。<sup>[8][9]</sup> 这条路径验证了中国无人驾驶载人 eVTOL 审定流程的可行性，但 VT35 是不同构型、不同重量级别和不同任务剖面的机型，必须独立完成审定；EH216-S 的三证不能视为 VT35 的既有资质。</p>
+  <p>国际侧，EASA 的 SC-VTOL 为垂直起降航空器提出专用条件，FAA 通过 powered-lift 规则整合动力升力航空器的认证与运行要求；中国则形成了无人驾驶航空器审定与运营的相应规章框架。复合翼机型在起降段类旋翼、巡航段类固定翼，审定中需要分别覆盖两类飞行阶段的安全要求。<sup>[10][11]</sup></p>
+  <h3>6.2 风险域与必须验证的证据</h3>
+  <table>
+    <thead>
+      <tr><th>风险域</th><th>可能危害</th><th>必须验证的证据</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>推进与动力</td><td>单桨或单电机失效、推力不对称、动力降级</td><td>故障树、冗余通道、故障注入试验、降级包线</td></tr>
+      <tr><td>飞控与航电</td><td>姿态失控、传感器冲突、链路中断、非预期动作</td><td>软硬件独立性、交叉校验、链路失效处置、硬件在环试验</td></tr>
+      <tr><td>电池与热安全</td><td>热失控、碰撞损伤、充电故障、循环寿命衰减</td><td>热防护、碰撞与振动试验、充电安全、循环寿命与检测方案</td></tr>
+      <tr><td>人员与地面安全</td><td>乘员伤害、地面人员坠落风险、噪声与下洗气流</td><td>约束系统、应急撤离、起降隔离区、噪声与社区影响评估</td></tr>
+      <tr><td>监管身份</td><td>机型未取证即载客、航线未获批运行</td><td>TC / PC / AC、运营人资质、航线与空域许可、保险方案</td></tr>
+    </tbody>
+  </table>
+  <p>ISO 26262 处理电气/电子系统的功能安全，ISO 21448 处理没有系统故障时由功能不足、性能边界和可预见误用引起的预期功能安全（SOTIF）风险。<sup>[12][13]</sup> 对无人载人航空器而言，许多风险不一定来自硬件故障，而可能来自环境感知不足、操作员对模式边界的误解、低空阵风、航线冲突或应急处置程序缺失。场景评价可借鉴“任务—场景—危险—控制措施—验证方法”的映射框架，把起降场周边、转换空域和巡航走廊分别定义清楚。</p>
+</section>
+
+<!-- ============ 07 应用场景 ============ -->
+<section id="scenarios">
+  <h2>07 应用场景：技术适配、运营可行与市场可行是三件事<span class="en">Scenarios: Technical Fit, Operational Viability, and Market Demand Are Different</span></h2>
+  <p>场景评价同时考虑载荷、航程、起降条件、监管难度和支付意愿。下表为定性评估，不表示精确概率；监管难度越高，表示进入公共运行所需证据越多。</p>
+  <table>
+    <thead>
+      <tr><th>场景</th><th>技术适配</th><th>监管难度</th><th>支付意愿</th><th>综合判断</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>城市圈城际点对点通勤（如珠三角、长三角城市间）</td><td>高</td><td>中高</td><td>中高</td><td>中期目标场景</td></tr>
+      <tr><td>跨海峡、跨山区通勤</td><td>较高</td><td>中高</td><td>较高</td><td>情境适配，依赖航线与备降条件</td></tr>
+      <tr><td>文旅观光与高端体验</td><td>较高</td><td>中</td><td>高</td><td>近期可试点</td></tr>
+      <tr><td>医疗急救与应急运输</td><td>中</td><td>高</td><td>高</td><td>待验证，需全天候响应与载荷冗余</td></tr>
+      <tr><td>物流货运</td><td>低（双座与 200 kg 级载荷受限）</td><td>高</td><td>中</td><td>不适配</td></tr>
+      <tr><td>城市内短途通勤</td><td>低（航程冗余大、起降场密度不足）</td><td>极高</td><td>中</td><td>非当前定位</td></tr>
+    </tbody>
+  </table>
+  <p>最先成立的场景不是城市内通勤，而是“受控场地内的文旅体验，以及条件成熟后的城际点对点试点”。VT35 的航程与固定翼巡航效率指向城市圈之间的中长途出行，例如广州至深圳、深圳至珠海一类典型城际联系；<sup>[5]</sup> 但这类场景需要固定航线、备降场地、天气窗口、运营资质和地面接驳共同支撑，不能用一段飞行演示直接外推成空中出租车网络。</p>
+  <p>应急与物流场景常被用来证明低空飞行器的社会价值，但 VT35 的双座布局和 200 kg 级有效载荷并不匹配重型货运；医疗急救则要求全天候响应、可靠维护、明确航路和应急医疗保障。在这些任务中，它是否优于直升机、固定翼飞机或地面车辆，目前缺乏公开运行数据支撑。</p>
+  <p>公众接受度受安全记录、噪声、价格、使用目的和程序公平共同影响。<sup>[14]</sup> 早期体验场景可以在封闭场地降低社会门槛；一旦进入城市公共空域，社区对噪声、隐私和坠落风险的关注就会成为与适航许可同等重要的约束。</p>
+  <figure>
+    <img src="assets/vertiport-hefei.jpg" alt="VT35 停在合肥起降场">
+    <figcaption>VT35 停在合肥城市起降场。来源：VCG via Getty Images / Forbes 报道（2025 年 10 月，合肥）。起降场复用是 VT35 降低地面设施成本的关键思路。</figcaption>
+  </figure>
+</section>
+
+<!-- ============ 08 市场可行性 ============ -->
+<section id="market">
+  <h2>08 市场可行性：长航程叙事不等于大规模市场<span class="en">Market Feasibility: Range Narrative Is Not a Mass Market</span></h2>
+  <p>VT35 标准版中国市场指导价 650 万元人民币，未来乘用按里程收费。<sup>[2][5]</sup> 这一价格信号对应的是早期机型、小批量交付和高价值场景，而不是面向普通通勤者的量产交通工具。与道路车辆预售不同，载人航空器在取证、交付和运营资质完成之前，订单与意向只能视为需求信号，不能等同于确认收入。</p>
+  <p>本文不把“低空经济万亿市场”直接乘上市场份额。宏观预测包含无人机、通用航空、基础设施和新型服务，不能用于估计单款机型的可服务市场。更合适的模型是：可服务对象 = 有城际时间价值的出行人群 × 对低空飞行有支付意愿的比例 × 可获得监管运行条件的比例。</p>
+  <table>
+    <thead>
+      <tr><th>情境</th><th>教学假设单价</th><th>年度可交付量</th><th>订单转化率</th><th>年收入量级</th><th>成立条件</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>保守</td><td>650 万元</td><td>10 架</td><td>40%</td><td>约 2,600 万元</td><td>仅封闭场地体验与少量示范飞行</td></tr>
+      <tr><td>基准</td><td>650 万元</td><td>30 架</td><td>60%</td><td>约 1.17 亿元</td><td>多城市有限许可、起降场与维护体系初步成型</td></tr>
+      <tr><td>积极</td><td>650 万元</td><td>60 架</td><td>75%</td><td>约 2.93 亿元</td><td>城际试点航线持续运营、监管路径明确、运维成本可控</td></tr>
+    </tbody>
+  </table>
+  <p>表中单价为官方指导价，交付量与转化率为教学情景变量，不构成销量预测；收入仅按“单价 × 可交付量 × 转化率”估算，未扣除退货、税费、渠道、保修、保险与事故准备金。</p>
+  <h3>8.1 需求侧：替代品是否足够好</h3>
+  <p>城际出行的替代品包括高铁、高速公路班车、轻型直升机和通用航空航班。VT35 的差异化必须体现在门到门时间、起降灵活度、乘坐成本或体验价值上。如果一段城际行程在地面接驳上耗费过长时间，空中航程的优势会被抵消；反之，在地面交通薄弱的山区、岛屿和海湾区域，点对点飞行的时间价值更容易显现。机场接驳与空中出行研究同样表明，需求会随场景、价格、时间和地面接驳条件显著变化，不能用单一总量预测覆盖所有用途。<sup>[15]</sup></p>
+  <h3>8.2 供给侧：起降、充电与运维网络</h3>
+  <p>VT35 可复用 EH216-S 既有起降场，是其降低地面设施成本的关键设计；<sup>[2]</sup> 但城际航线还需要航线审批、起降点网络、充电或换电设施、定期维护、备件供应、人员培训和保险体系。与电动车充电相比，航空器充电、检测和适航维护的标准化、人员资质和安全边界更复杂。没有服务网络支撑的机型，即使单机性能达标，也只能作为受控活动设备存在。</p>
+  <h3>8.3 市场结论分级</h3>
+  <ul>
+    <li>近期：品牌示范与文旅体验价值较高，限量体验飞行可能成立；</li>
+    <li>中期：城市圈城际点对点试点在取证与航线落地后可以逐步展开；</li>
+    <li>远期：高频大众通勤市场缺乏证据；重型货运场景与机型定位不匹配。</li>
+  </ul>
+</section>
+
+<!-- ============ 09 竞品比较 ============ -->
+<section id="comparison">
+  <h2>09 与其他 eVTOL 及航空器方案的横向比较<span class="en">Comparison with Other eVTOL and Aircraft Concepts</span></h2>
+  <table>
+    <thead>
+      <tr><th>产品</th><th>类别</th><th>核心验证路径</th><th>主要优势</th><th>主要约束</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>亿航 VT35</td><td>复合翼无人载人 eVTOL</td><td>CAAC TC 审定中，复用 EH216-S 运营经验</td><td>长航程、无人驾驶、起降场复用、纯电推进</td><td>取证未完成、双座与载荷有限、运营网络待建</td></tr>
+      <tr><td>Joby S4</td><td>有人倾转旋翼 eVTOL</td><td>FAA 型号认证与运营体系建设</td><td>航空设计成熟、低噪声、商业航线目标明确</td><td>适航周期长、基础设施投入大、成本高</td></tr>
+      <tr><td>Archer Midnight</td><td>有人复合翼 eVTOL</td><td>型号认证、量产合作与运营合作</td><td>城市航线定位、规模化制造布局</td><td>系统复杂、公众接受度与起降场配套</td></tr>
+      <tr><td>峰飞航空 V2000CG 盛世龙</td><td>复合翼 eVTOL（载货先行、载人拓展）</td><td>适航审定与多地试飞验证</td><td>货运场景起步、载重与航程余地较大</td><td>载人认证进度、运营成本与航线网络</td></tr>
+      <tr><td>小鹏汇天 AeroHT 方案</td><td>分体式陆空组合 / 飞行汽车方向</td><td>飞行器研发、地面平台与示范运行</td><td>车机分工明确、消费级产品叙事</td><td>模态衔接、运营、适航与成本</td></tr>
+      <tr><td>传统轻型直升机</td><td>有人驾驶旋翼航空器</td><td>成熟适航与运行体系</td><td>任务成熟、载荷与航程灵活、可垂直起降</td><td>油耗、噪声、购置与维护成本高、飞行员依赖</td></tr>
+    </tbody>
+  </table>
+  <p>横向比较的关键不是谁飞得更远，而是每个产品如何闭环自己的验证路径。Joby 与 Archer 围绕有人驾驶航空器认证设计；峰飞以货运先行再拓展载人；小鹏汇天尝试把地面车辆与飞行器组合；VT35 则从无人驾驶和城际航程切入。不同路径对应不同的资本强度、监管风险和收入节奏。竞品定位来自各企业公开页面，属于企业自证材料，应与监管文件和第三方证据交叉使用。<sup>[16][17][18][19]</sup></p>
+  <p>NASA 城市空中交通成熟度量表强调，低空交通不是单一飞行器能力，而是交通管理、基础设施、运营、社区接受和监管共同成熟的体系。<sup>[20]</sup> 用这一框架看 VT35，它在“飞行器平台与航程设计”上进展明显，但在航线网络、起降场密度、运营体系、持续适航和社区融合维度仍需逐步积累。这种“单机推进较快、体系仍在成型”的组合，正是许多新型航空器在传播上成功、在交通落地时困难的原因。</p>
+</section>
+
+<!-- ============ 10 工程化路线 ============ -->
+<section id="roadmap">
+  <h2>10 从演示走向工程化：Go/No-Go 判据<span class="en">From Demonstration to Engineering: Go/No-Go Criteria</span></h2>
+  <p>可信的工程化路线不应从扩大宣传开始，而应从定义可验证的飞行包线和安全目标开始。建议将下一阶段证据拆成四个门槛：</p>
+  <table>
+    <thead>
+      <tr><th>门槛</th><th>必须公开或可核查的证据</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Gate 1　可重复飞行包线</td><td>空载与满载质量、高度、速度、航时、风速范围、姿态误差、载荷与备降裕度</td></tr>
+      <tr><td>Gate 2　推进与电池安全</td><td>电池热失控防护、动力冗余、循环寿命、充电安全、碰撞与振动试验</td></tr>
+      <tr><td>Gate 3　故障安全</td><td>单点与多点失效、降级控制、应急着陆方案、乘员与地面人员隔离</td></tr>
+      <tr><td>Gate 4　监管与经济闭环</td><td>TC / PC / AC、运营许可、航线与空域批准、保险、维护周转、起降网络</td></tr>
+    </tbody>
+  </table>
+  <p>若这四个门槛无法公开至少部分证据，最合理的结论不是“项目失败了”，而是“它仍停留在样机演示与产品验证阶段”。对研究者和学生而言，保留不确定性比用愿望填补空白更专业。</p>
+  <p>路线图的第二阶段应当建立“安全案例骨架”：任务与运行环境、系统边界、危险清单、风险接受原则、关键安全需求、独立验证方法和残余风险说明。第三阶段是运行体系建设：场地审批、人员训练、天气预报、观众隔离、应急消防、残骸处置和事故报告。第四阶段才是市场扩张：从单场地、低频次、受控观众开始，再逐步增加频次和地点；每增加一个地点，都需要重新评估噪声、净空、地面交通、消防和社区沟通。</p>
+</section>
+
+<!-- ============ 11 课程延伸 ============ -->
+<section id="teaching">
+  <h2>11 课程延伸：把案例转化为可复用的研究方法<span class="en">Teaching Notes: Reusable Research Method</span></h2>
+  <p>本案例可以拆成五个课程练习：</p>
+  <ol>
+    <li><strong>证据表：</strong>把十条最吸引人的媒体陈述转换为“来源、证据类型、可支持结论、不可支持结论”四列。</li>
+    <li><strong>系统边界图：</strong>明确飞行器、推进系统、电池、感知与控制、起降场、监管机构之间的接口。</li>
+    <li><strong>故障清单：</strong>至少覆盖推进、电池、飞控、链路和人员隔离五类风险。</li>
+    <li><strong>场景矩阵：</strong>为城际通勤、文旅体验、应急、物流等场景分别建立评价，而不是只讨论最乐观的通勤场景。</li>
+    <li><strong>市场敏感性表：</strong>说明单价、转化率和交付量变化如何影响收入量级，并标注假设与未扣除成本。</li>
+  </ol>
+  <p>建议的最终作业不是“写一篇介绍”，而是一个可以公开审查的证据包：一页问题定义、一张系统架构图、一套技术指标体系、一张危险与场景矩阵、一张竞品比较表、一张市场敏感性表、一份参考文献，以及一份资料与工具使用记录。评价时不奖励漂亮但无来源的形容词，而奖励能明确说出哪些结论还没有证据。</p>
+</section>
+
+<!-- ============ 12 局限 ============ -->
+<section id="limits">
+  <h2>12 局限与未决问题<span class="en">Limitations and Open Questions</span></h2>
+  <ul>
+    <li>亿航未披露 VT35 完整飞行包线、电池容量与重量预算、控制架构、安全分析和试验记录；本文涉及的性能参数以官方产品页和新闻稿为准。</li>
+    <li>媒体报道在速度、航程、载客与定价口径上存在差异，部分细节为发布会或采访口径，应以企业后续公告和局方文件为准。</li>
+    <li>本文的物理判断只建立数量级边界，不替代工程试验；市场表是敏感性工具，不是企业财务预测。</li>
+    <li>适航审定进展受政策、试验进度和地域审批影响，本文不预测取证时间。</li>
+  </ul>
+  <p>后续研究至少应追踪四类新证据：第一，是否发布可重复的测试报告，包括质量、高度、航时、载荷和环境条件；第二，是否出现民航局对 VT35 型号审定、生产许可或单机适航的正式文件；第三，电池、推进与飞控系统的供应商、专利与维护方案是否公开；第四，是否有第三方工程机构完成独立测试或安全评估。任一类证据出现，都会显著改变本文的技术成熟度与市场判断。</p>
+</section>
+
+<!-- ============ 参考文献 ============ -->
+<section id="refs" class="refs">
+  <h2>参考文献<span class="en">References</span></h2>
+  <ol>
+    <li>亿航智能. VT35 无人驾驶载人航空器产品页[EB/OL]. [2026-11-26]. <a href="https://www.ehang.com/cn/vt35/">https://www.ehang.com/cn/vt35/</a>.</li>
+    <li>亿航智能. 亿航智能发布新一代长航程无人驾驶载人航空器 VT35，重塑先进空中交通生态[EB/OL]. 2025-10-13[2026-11-26]. <a href="https://www.ehang.com/news/1290.html">https://www.ehang.com/news/1290.html</a>.</li>
+    <li>EHang Holdings Limited. Global Debut: EHang Introduces VT35, a Next-Generation Long-Range Pilotless Passenger eVTOL[EB/OL]. 2025-10-13[2026-11-26]. <a href="https://ir.ehang.com/news-releases/news-release-details/global-debut-ehang-introduces-vt35-next-generation-long-range">https://ir.ehang.com/news-releases/news-release-details/global-debut-ehang-introduces-vt35-next-generation-long-range</a>.</li>
+    <li>澎湃新闻 · 合肥发布. 全球首发，就在合肥！[EB/OL]. 2025-10-14[2026-11-26]. <a href="https://m.thepaper.cn/newsDetail_forward_31779761">https://m.thepaper.cn/newsDetail_forward_31779761</a>.</li>
+    <li>南方+客户端. 有望广深直达！亿航最新城际 eVTOL 来了[EB/OL]. 2025-10-15[2026-11-26]. <a href="http://m.toutiao.com/group/7561266623139643938/">http://m.toutiao.com/group/7561266623139643938/</a>.</li>
+    <li>人民网安徽频道. 合肥首飞！长途空中“飞的”来啦！[EB/OL]. 2025-12-30[2026-11-26]. <a href="http://ah.people.com.cn/n2/2025/1230/c374164-41458908.html">http://ah.people.com.cn/n2/2025/1230/c374164-41458908.html</a>.</li>
+    <li>亿航智能. 亿航智能发布长航距自动驾驶飞行器 VT-30，扩展区域空中交通覆盖范围[EB/OL]. 2021-05-26[2026-11-26]. <a href="https://www.ehang.com/news/771.html">https://www.ehang.com/news/771.html</a>.</li>
+    <li>亿航智能. EH216-S 适航审定历程[EB/OL]. [2026-11-26]. <a href="https://www.ehang.com/cn/ehang216s/airworthiness">https://www.ehang.com/cn/ehang216s/airworthiness</a>.</li>
+    <li>中国民用航空局中南地区管理局. 中南局颁发全国首张载人无人机的生产许可证[EB/OL]. 2024-04-16[2026-11-26]. <a href="http://www.caac.gov.cn/local/ZNGLJ/ZN_DQYW/202404/t20240416_223537.html">http://www.caac.gov.cn/local/ZNGLJ/ZN_DQYW/202404/t20240416_223537.html</a>.</li>
+    <li>EUROPEAN UNION AVIATION SAFETY AGENCY. Special Condition for Small-category VTOL (SC-VTOL-01) and Means of Compliance[EB/OL]. [2026-11-26]. <a href="https://www.easa.europa.eu/en/domains/aircraft-products/vertical-lift/special-condition-vtol">https://www.easa.europa.eu/en/domains/aircraft-products/vertical-lift/special-condition-vtol</a>.</li>
+    <li>FEDERAL AVIATION ADMINISTRATION. Integration of Powered-Lift: Pilot Certification and Operations[EB/OL]. Federal Register, 2024[2026-11-26]. <a href="https://www.federalregister.gov/documents/2024/11/06/2024-25636/integration-of-powered-lift-pilot-certification-and-operations">https://www.federalregister.gov/documents/2024/11/06/2024-25636/integration-of-powered-lift-pilot-certification-and-operations</a>.</li>
+    <li>INTERNATIONAL ORGANIZATION FOR STANDARDIZATION. ISO 26262:2018 Road vehicles — Functional safety[S]. Geneva: ISO, 2018.</li>
+    <li>INTERNATIONAL ORGANIZATION FOR STANDARDIZATION. ISO 21448:2022 Road vehicles — Safety of the intended functionality[S]. Geneva: ISO, 2022.</li>
+    <li>NAZARI F, NORUZOLIAEE M, NURUL HABIB K. Assessing public acceptance of urban air mobility: Behavioral insights[J]. Journal of Air Transport Management, 2026, 131: 102907.</li>
+    <li>GOYAL R, REICHE C, FERNANDO C, et al. Advanced Air Mobility: Demand Analysis and Market Potential of the Airport Shuttle and Air Taxi Markets[J]. Sustainability, 2021, 13(13): 7421.</li>
+    <li>JOBY AVIATION. Aircraft and Technology[EB/OL]. [2026-11-26]. <a href="https://www.jobyaviation.com/technology">https://www.jobyaviation.com/technology</a>.</li>
+    <li>ARCHER AVIATION. Midnight[EB/OL]. [2026-11-26]. <a href="https://www.archer.com/midnight">https://www.archer.com/midnight</a>.</li>
+    <li>峰飞航空科技. V2000CG 盛世龙产品介绍[EB/OL]. [2026-11-26]. <a href="https://www.autoflight.com/">https://www.autoflight.com/</a>.</li>
+    <li>小鹏汇天 AeroHT. 飞行汽车产品方案[EB/OL]. [2026-11-26]. <a href="https://www.aeroht.com/">https://www.aeroht.com/</a>.</li>
+    <li>GOODRICH K H, THEODORE C R. Description of the NASA Urban Air Mobility Maturity Level (UML) Scale[C]//Scitech 2021 Forum. 2021. DOI:10.2514/6.2021-1627.</li>
+  </ol>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>本页面为《飞行汽车技术基础》课程作业，仅供课程研究与讨论使用。页面中引用的企业参数以官方公开材料为准；市场与场景判断为教学分析，不构成投资、采购或出行建议。</p>
+  </div>
+</footer>
+
+</div>
+</body>
+</html>
